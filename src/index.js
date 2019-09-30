@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {ListArticle} from './components/Article';
-import {Provider} from 'react-redux';
-import store from './js/store';
+import App from './components/App'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-console.log(store);
-console.log(store.getState());
 const Index= () => {
-  return(<Provider store={store}>
-            <ListArticle />
-          </Provider>); 
+  return(
+          <MuiThemeProvider>
+              <App />
+           </MuiThemeProvider>   
+  
+  ); 
 };
 
 ReactDOM.render(<Index />, document.getElementById("index"));

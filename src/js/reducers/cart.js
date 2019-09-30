@@ -14,7 +14,7 @@ export default function cart(state=[] , action) {
         
         case removeFromCart:
         
-            return [...state.slice(0, action.payload.index), ...state.slice(action.payload.index + 1)]
+            return [...state.slice(0, action.index), ...state.slice(action.index + 1)]
         
         case increaseQuantity:
         

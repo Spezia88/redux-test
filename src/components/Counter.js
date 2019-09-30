@@ -1,30 +1,50 @@
 import React from "react";
-import { useSelector,useDispatch } from "react-redux";
 import '../css/index.css';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  fab: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+}));
 
 
-export const Counter=({fnAdd,fnRemove,index,stateName})=>{
- 
-      const quantity = useSelector(state => state[stateName][index].quantity);
-      console.log("Counter quantity: "+quantity+" for index: "+index);
-      
+export const Counter=({fnAdd,fnRemove,index,quantity})=>{
+
+      const classes=useStyles();
+
       function handleAdd(){
-        fnAdd();
+      
+          fnAdd(index);
+        
       }
 
       function handleRemove(){
-        fnRemove();
+       
+          fnRemove(index);
+       
       }
    
     
       return (
                 <div key={index} className="counter">
-                  <h4>Quantity</h4>
-                  <div>
-                    <button onClick={handleRemove}>-</button>
-                    <span className="count">{quantity}</span>
-                    <button onClick={handleAdd}>+</button>
-                  </div>
+                    <h4>Quantity</h4>
+                    <div>
+                      <Fab color="secondary" aria-label="remove" size="small" className={classes.fab} onClick={handleRemove}>
+                        <RemoveIcon />
+                      </Fab>
+                      
+                      <output >{quantity}</output>
+                      <Fab color="primary" aria-label="add" size="small" className={classes.fab} onClick={handleAdd}>
+                          <AddIcon />
+                      </Fab>
+                      </div>
                 </div>
               );
         
