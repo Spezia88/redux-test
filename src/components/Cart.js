@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import { useSelector,useDispatch } from "react-redux";
@@ -6,7 +6,9 @@ import {Article,useStyles} from './ListArticles';
 import {increaseQuantityCart,decreaseQuantityCart,removeArticle} from '../js/actions/cart';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import {Counter} from './Counter';
 
 const Cart=()=>{
@@ -14,7 +16,7 @@ const Cart=()=>{
     const cartList=useSelector(state => state.cart);
     const dispatch=useDispatch();
     const classes = useStyles();
-    
+    const [showButton,setShowButton]=useState(false);
 
     function handleRemove(e,index){
             e.preventDefault();
@@ -29,6 +31,15 @@ const Cart=()=>{
        
         dispatch(decreaseQuantityCart(index));
     }
+
+    useEffect(() => {   
+        debugger;
+        if(cartList.length>0)
+            setShowButton(true);
+        else    
+            setShowButton(false);
+       
+    }, [cartList])
    
     return(
         <Container className={classes.root}>
@@ -57,9 +68,18 @@ const Cart=()=>{
                                 </Grid>
                         
                         </Grid>
+                    
                            
                     )
                 })}
+                {showButton && <Grid>
+                                    <Box component="span" m={3}>
+                                        <Button variant="contained" size="large" color="primary" >Acquista</Button>
+                                    </Box>
+                              </Grid>
+                }
+               
+                
             
            
             </Paper>
